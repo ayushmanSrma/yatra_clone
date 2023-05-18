@@ -31,7 +31,7 @@ class _homePageState extends State<homePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[currentIndex],
-      bottomNavigationBar: SafeArea(
+      bottomNavigationBar: SingleChildScrollView(
         child: BottomNavigationBar(
           onTap: onTap,
           selectedItemColor: Colors.red,

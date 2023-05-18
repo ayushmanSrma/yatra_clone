@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yatri_clone/Authentications/LoginScrren.dart';
+import 'package:yatri_clone/Authentications/main_page.dart';
 import 'package:yatri_clone/Authentications/signUp.dart';
 import 'package:yatri_clone/navpage/HomePage.dart';
 import 'package:firebase_core/firebase_core.dart';

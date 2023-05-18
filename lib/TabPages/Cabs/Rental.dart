@@ -58,73 +58,106 @@ class _rentalsState extends State<rentals> {
     });
   }
 
+  String fromLocation = "Delhi";
+  String toLocation = "Mumbai";
+  int _value2 =0;
+
+  Widget rowRound({required int value,required String way,String subway = "default"}){
+    return Row(
+      children: [
+        Radio(value: value, groupValue: _value2, onChanged: (val){
+          setState(() {
+            _value2=val!;
+          });
+        }),
+        RichText(text: TextSpan(
+            text: way,
+            style: TextStyle(color: Colors.black,fontSize: 15),
+            children: [
+              TextSpan(text: '\n${subway}',style: TextStyle(fontSize: 12,color: Colors.grey))
+            ]
+        ))
+      ],
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
       child: Column(
         children: [
-          // Row(
-          //   children: [
-          //     Transform.scale(
-          //       scale: 1,
-          //       child: RadioListTile(
-          //           value: 1,
-          //           groupValue: selectedValue,
-          //           onChanged: (value) {
-          //             setState(() {
-          //               selectedValue = 1;
-          //             });
-          //           }),
-          //     ),
-          //   ],
-          // ),
           Row(
             children: [
-              GestureDetector(
-                onTap: () {},
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "From",
-                      style: TextStyle(fontSize: 15, color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Delhi",
-                      style: TextStyle(fontSize: 20),
-                    )
-                  ],
+              rowRound(value:1, way:"ROUND TRIP",subway: "OUTSTATION"),
+              rowRound(value:2, way:"ONE WAY",subway: "OUTSTATION"),
+              rowRound(value:3, way:"LOCAL",subway: "HOURLY BASIS"),
+            ],
+          ),
+          //Leaving From->Going to
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "From",
+                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        fromLocation,
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
-                width: 130,
+                width: 100,
               ),
-              Icon(Icons.compare_arrows_sharp),
+              GestureDetector(
+                  onTap: (){
+                String tmp ="";
+
+                  tmp = toLocation;
+                  toLocation = fromLocation;
+                  fromLocation = tmp;
+                  print("$toLocation-$fromLocation");
+                  setState(() {});
+
+              },child: Icon(Icons.compare_arrows_sharp)),
               SizedBox(
                 width: 97,
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "To",
-                      style: TextStyle(fontSize: 15, color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Mumbai",
-                      style: TextStyle(fontSize: 20),
-                    )
-                  ],
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "To",
+                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        toLocation,
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],

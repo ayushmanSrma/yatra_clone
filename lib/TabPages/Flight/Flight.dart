@@ -23,6 +23,10 @@ class _flightState extends State<flight> {
     CheckBoxModal(title: 'Student Fare'),
     CheckBoxModal(title: 'Senior Citizen'),
   ];
+  String fromLocation = "Delhi";
+  String toLocation = "Mumbai";
+  String toLocCode = "DEL";
+  String fromLocCode = "BOM";
 
   @override
   Widget build(BuildContext context) {
@@ -147,64 +151,76 @@ class _flightState extends State<flight> {
             ),
             //Depart From
             SizedBox(height: 10.0,),
-            Row(
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                //    SizedBox(width: 10,),
-                GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Depart from',
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                        Text(
-                          'New Delhi',
-                          style: TextStyle(
-                            fontSize: 15.0,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "From",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                        ),
-                        Text(
-                          'DEL',
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            fromLocation,
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          Text(toLocCode,style: TextStyle(fontSize: 12,color: Colors.grey),)
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: 103,),
-                Icon(Icons.compare_arrows_rounded),
-                SizedBox(width: 102,),
-                GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
-                        Text(
-                          'Depart from',
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                        Text(
-                          'New Delhi',
-                          style: TextStyle(
-                            fontSize: 15.0,
+                  SizedBox(
+                    width: 100,
+                  ),
+                  IconButton(onPressed: (){
+                    String tmp ="";
+                          String tmp2 ="";
+                          tmp = toLocation;
+                          toLocation = fromLocation;
+                          fromLocation = tmp;
+                          tmp2 = toLocCode;
+                          toLocCode = fromLocCode;
+                          fromLocCode = tmp2;
+                          setState(() {});
+                  },
+                      icon: Icon(Icons.compare_arrows_sharp)),
+                  SizedBox(
+                    width: 97,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Going To",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                        ),
-                        Text(
-                          'DEL',
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            toLocation,
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          Text(fromLocCode,style: TextStyle(fontSize: 12,color: Colors.grey),)
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
 
             //Departure date
