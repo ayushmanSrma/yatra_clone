@@ -9,6 +9,17 @@ class signUp extends StatefulWidget {
 
 class _signUpState extends State<signUp> {
 
+  //email/Password controller
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose(){
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   int val = 1;
 
   @override
@@ -25,7 +36,7 @@ class _signUpState extends State<signUp> {
           ) ,
         ),
       ),
-      body:Center(
+      body:SingleChildScrollView(
         child: Column(
           children: [
             Text('Welcome to Yatra!',style: TextStyle(

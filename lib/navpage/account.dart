@@ -1,20 +1,20 @@
-import 'dart:ffi';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../Authentications/LoginScrren.dart';
-
 class account extends StatefulWidget {
-  const account({Key? key}) : super(key: key);
+  //final VoidCallback goLogin;
+  const account({Key? key,}) : super(key: key);
 
   @override
   State<account> createState() => _accountState();
 }
 
 class _accountState extends State<account> {
+  final user = FirebaseAuth.instance.currentUser!;
 
-  bool isVisible = true;
+  // bool isVisible = (FirebaseAuth.instance.currentUser == null);
 
   @override
   Widget build(BuildContext context) {
@@ -56,31 +56,47 @@ class _accountState extends State<account> {
                   ),
                 ),
                 SizedBox(height: 50),
-                StreamBuilder<User?>(
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder: (context,snapshot){
-                      if (snapshot.hasData){
-                        setState(() {
-                          isVisible = !isVisible;
-                        });
-                      }
-                    }
-                ),
-                Visibility(
-                  visible: isVisible,
-                  child: ElevatedButton(
-                     onPressed: (){},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red[500],
-                        padding: EdgeInsets.fromLTRB(110, 15, 110, 15)),
-                    child: const Text(
-                      'LOGIN/SIGN UP',
-                      style: TextStyle(
-                          fontSize: 15,
-                          ),
-                    ),
-                  ),
-                ),
+                // StreamBuilder<User?>(
+                //     stream: FirebaseAuth.instance.authStateChanges(),
+                //     builder: (context,snapshot){
+                //       if (snapshot.hasData){
+                //         setState(() {
+                //           isVisible = !isVisible;
+                //         });
+                //         print(isVisible);
+                //       }
+                //     }
+                // ),
+                // Visibility(
+                //   visible: isVisible,
+                //   child: ElevatedButton(
+                //      onPressed: (){}, //widget.goLogin,
+                //     style: ElevatedButton.styleFrom(
+                //         backgroundColor: Colors.red[500],
+                //         padding: EdgeInsets.fromLTRB(110, 15, 110, 15)),
+                //     child: const Text(
+                //       'LOGIN/SIGN UP',
+                //       style: TextStyle(
+                //           fontSize: 15,
+                //           ),
+                //     ),
+                //   ),
+                // ),
+
+                // Visibility(
+                //   visible: !isVisible,
+                //   child: Column(
+                //     children: [
+                //       Container(
+                //         width: double.infinity,
+                //         decoration: BoxDecoration(
+                //             image: DecorationImage(image: AssetImage('Layer.png'),fit: BoxFit.cover)
+                //         ),
+                //       ),
+                //       Text("hi, "+user.email!)
+                //     ],
+                //   ),
+                // ),
 
                 //Bottom Icons
                 Padding(padding: const EdgeInsets.only(left: 15.0,top: 50),
@@ -168,6 +184,13 @@ class _accountState extends State<account> {
                       ],
                     )
                 ),
+                // ElevatedButton(
+                //   onPressed: (){FirebaseAuth.instance.signOut();},
+                //     child: Text("Sign Out"),
+                //   style: ElevatedButton.styleFrom(
+                //       backgroundColor: Colors.red[500],
+                //       padding: EdgeInsets.fromLTRB(80, 10, 80, 10)),
+                // )
               ],
             ),
 
