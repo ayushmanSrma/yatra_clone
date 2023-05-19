@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yatri_clone/Authentications/LoginScrren.dart';
+import 'package:yatri_clone/Authentications/auth_page.dart';
 import 'package:yatri_clone/navpage/HomePage.dart';
 
 class MainPage extends StatelessWidget {
@@ -15,7 +16,7 @@ class MainPage extends StatelessWidget {
           if (snapshot.hasData){
             return homePage();
           }else{
-            return loginScreen();
+            return AuthPage();
           }
         }
       ),
