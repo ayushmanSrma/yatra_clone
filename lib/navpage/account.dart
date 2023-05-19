@@ -1,11 +1,9 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class account extends StatefulWidget {
   //final VoidCallback goLogin;
-  const account({Key? key,}) : super(key: key);
+  const account({Key? key}) : super(key: key);
 
   @override
   State<account> createState() => _accountState();
@@ -14,7 +12,12 @@ class account extends StatefulWidget {
 class _accountState extends State<account> {
   final user = FirebaseAuth.instance.currentUser!;
 
-  // bool isVisible = (FirebaseAuth.instance.currentUser == null);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(user);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +42,9 @@ class _accountState extends State<account> {
                 ),
 
                 SizedBox(height: 13.0,),
-                SingleChildScrollView(
+                Padding(padding: const EdgeInsets.only(left: 15.0),
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Padding(padding: const EdgeInsets.only(left: 15.0),
                   child: Row(children: [
                     Icon(Icons.check_circle,color: Colors.green[300],),
                     Text('  Unlock E-Cash'),
@@ -52,8 +55,8 @@ class _accountState extends State<account> {
                     Icon(Icons.check_circle,color: Colors.green[300],),
                     Text('  Faster Checkout'),
                   ]
-                  )
                   ),
+                )
                 ),
                 SizedBox(height: 50),
                 // StreamBuilder<User?>(
@@ -67,21 +70,21 @@ class _accountState extends State<account> {
                 //       }
                 //     }
                 // ),
-                // Visibility(
-                //   visible: isVisible,
-                //   child: ElevatedButton(
-                //      onPressed: (){}, //widget.goLogin,
-                //     style: ElevatedButton.styleFrom(
-                //         backgroundColor: Colors.red[500],
-                //         padding: EdgeInsets.fromLTRB(110, 15, 110, 15)),
-                //     child: const Text(
-                //       'LOGIN/SIGN UP',
-                //       style: TextStyle(
-                //           fontSize: 15,
-                //           ),
-                //     ),
-                //   ),
-                // ),
+                Visibility(
+                  visible: false,
+                  child: ElevatedButton(
+                     onPressed: (){}, //widget.goLogin,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red[500],
+                        padding: EdgeInsets.fromLTRB(110, 15, 110, 15)),
+                    child: const Text(
+                      'LOGIN/SIGN UP',
+                      style: TextStyle(
+                          fontSize: 15,
+                          ),
+                    ),
+                  ),
+                ),
 
                 // Visibility(
                 //   visible: !isVisible,
@@ -98,7 +101,7 @@ class _accountState extends State<account> {
                 //   ),
                 // ),
 
-                //Bottom Icons
+                //Bottom Icons & text
                 Padding(padding: const EdgeInsets.only(left: 15.0,top: 50),
                      child: Column(
                       children: [
@@ -184,13 +187,17 @@ class _accountState extends State<account> {
                       ],
                     )
                 ),
-                // ElevatedButton(
-                //   onPressed: (){FirebaseAuth.instance.signOut();},
-                //     child: Text("Sign Out"),
-                //   style: ElevatedButton.styleFrom(
-                //       backgroundColor: Colors.red[500],
-                //       padding: EdgeInsets.fromLTRB(80, 10, 80, 10)),
-                // )
+
+
+                ElevatedButton(
+                  onPressed: (){FirebaseAuth.instance.signOut();},
+                    child: Text("Sign Out"),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red[500],
+                      padding: EdgeInsets.fromLTRB(80, 10, 80, 10)),
+                )
+
+
               ],
             ),
 

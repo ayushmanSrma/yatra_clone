@@ -12,6 +12,7 @@ class _loginScreenState extends State<loginScreen> {
   //email/Password controller
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool isPasswordVisible = true;
 
   Future signIn() async{
     await FirebaseAuth.instance.signInWithEmailAndPassword(email:_emailController.text.trim(), password: _passwordController.text.trim());
@@ -86,7 +87,7 @@ class _loginScreenState extends State<loginScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
                       child: TextField(
                          controller: _passwordController,
-
+                        obscureText: isPasswordVisible,
                         decoration: InputDecoration(
                           labelText: "Password",
                           border: OutlineInputBorder(

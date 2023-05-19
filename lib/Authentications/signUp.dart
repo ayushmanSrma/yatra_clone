@@ -59,7 +59,7 @@ class _signUpState extends State<signUp> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10.0),
                       child: TextField(
-                        // controller: _passwordcontroller,
+                         controller: _emailController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0)
@@ -95,7 +95,7 @@ class _signUpState extends State<signUp> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 10.0),
                       child: TextField(
-                        // controller: _passwordcontroller,
+                         controller: _passwordController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0)
