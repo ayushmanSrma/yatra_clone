@@ -112,6 +112,7 @@ class _signUpState extends State<signUp> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
                           ),
+                          obscureText: true,
                         ),
                       ),
 

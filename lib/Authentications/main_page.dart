@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:yatri_clone/Authentications/LoginScrren.dart';
 import 'package:yatri_clone/Authentications/auth_page.dart';
-import 'package:yatri_clone/navpage/HomePage.dart';
+import 'package:yatri_clone/Authentications/emailVerification.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class MainPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context,snapshot){
           if (snapshot.hasData){
-            return homePage();
+            return VerifyEmail();
           }else{
             return AuthPage();
           }
