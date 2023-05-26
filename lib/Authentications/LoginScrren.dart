@@ -18,9 +18,20 @@ class _loginScreenState extends State<loginScreen> {
   bool isPasswordVisible = true;
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+    } on FirebaseAuthException catch(e){
+      debugPrint(e.toString());
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            content: Text(e.message.toString(),
+              textAlign: TextAlign.center,
+            ),
+          ));
+    }
   }
 
   @override

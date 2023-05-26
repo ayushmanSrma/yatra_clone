@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,16 +14,53 @@ class _signUpState extends State<signUp> {
   //email/Password controller
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
-
+  //create the user
   Future registerUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim());
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim());
+      } on FirebaseAuthException catch(e){
+        debugPrint(e.toString());
+        showDialog(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              content: Text(e.message.toString(),
+                textAlign: TextAlign.center,
+              ),
+            ));
+      }
+
+
+    //add user details
+    addUserDetails(
+        _firstNameController.text.trim(),
+        _lastNameController.text.trim(),
+        _emailController.text.trim(),
+         int.parse(_phoneController.text.trim()),
+    );
+  }
+
+  Future addUserDetails(String firstName,String lastName,String email,int phone) async{
+    await FirebaseFirestore.instance.collection("user").add({
+      'first name' : firstName,
+      'last name' : lastName,
+      'phone' : phone,
+      'email' : email,
+    }); //store the information in "user" collection
   }
 
   int val = 1;
@@ -87,7 +125,7 @@ class _signUpState extends State<signUp> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 10.0),
                         child: TextField(
-                          // controller: _passwordcontroller,
+                           controller: _phoneController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
@@ -169,7 +207,7 @@ class _signUpState extends State<signUp> {
                               padding: const EdgeInsets.only(
                                   left: 18.0, right: 10, bottom: 10.0),
                               child: TextField(
-                                // controller: _passwordcontroller,
+                                 controller: _firstNameController,
                                 decoration: InputDecoration(
                                   hintText: 'First Name',
                                   border: OutlineInputBorder(
@@ -183,7 +221,7 @@ class _signUpState extends State<signUp> {
                               padding: const EdgeInsets.only(
                                   left: 10.0, right: 16.0, bottom: 10.0),
                               child: TextField(
-                                // controller: _passwordcontroller,
+                                 controller: _lastNameController,
                                 decoration: InputDecoration(
                                   hintText: 'Last Name',
                                   border: OutlineInputBorder(
