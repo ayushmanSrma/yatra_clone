@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:yatri_clone/TabPages/Flight/airportdata.dart';
 
-import 'depart.dart';
 
 enum ClassTypeEnum {Economy,PremiumEco,Business}
 
 class flight extends StatefulWidget {
-  flight({Key? key}) : super(key: key);
+  final location;
+  const flight({Key? key,required this.location}) : super(key: key);
 
   @override
   State<flight> createState() => _flightState();
@@ -159,7 +160,12 @@ class _flightState extends State<flight> {
                     Expanded(
                       flex: 1,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context)=>HomePage())
+                          );
+                        },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -171,7 +177,7 @@ class _flightState extends State<flight> {
                               height: 15,
                             ),
                             Text(
-                              fromLocation,
+                              widget.location,
                               style: TextStyle(fontSize: 15),
                             ),
                             Text(toLocCode,style: TextStyle(fontSize: 12,color: Colors.grey),)

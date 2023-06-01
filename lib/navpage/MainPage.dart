@@ -69,7 +69,7 @@ class _mainpageState extends State<mainpage> {
              Expanded(
                child: TabBarView(
                 children: [
-                  flight(),
+                  flight(location: "null",),
                   hotels(),
                   holidays(),
                   buses(),
